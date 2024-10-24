@@ -7,9 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/nurse', name: 'app_nurse')]
 class NurseController extends AbstractController
 {
-    #[Route('/nurse', name: 'app_nurse')]
+    #[Route('/getAll', name: 'app_nurse')]
     public function index(): JsonResponse
     {
         $json_nurse = file_get_contents('DATA.json');
@@ -18,7 +19,7 @@ class NurseController extends AbstractController
         return new JsonResponse($json_data);
     }
 
-    #[Route('/nurse/filter', name: 'app_nurse_filter', methods: ['GET'])]
+    #[Route('/findByName', name: 'app_nurse_findByName', methods: ['GET'])]
     public function filterByName(Request $request): JsonResponse
     {
         $json_nurse = file_get_contents('DATA.json');
@@ -29,7 +30,7 @@ class NurseController extends AbstractController
     
         // Filtrar los enfermeros por nombre usando array_filter
         $filtered_nurses = array_filter($json_data, function($nurse) use ($name) {
-            return strtolower($nurse['first_name']) === strtolower($name);
+            return strtolower($nurse['first_name']) == strtolower($name);
         });
     
         // Retornar los enfermeros filtrados como respuesta JSON
