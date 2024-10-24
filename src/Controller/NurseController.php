@@ -34,6 +34,6 @@ class NurseController extends AbstractController
         });
     
         // Retornar los enfermeros filtrados como respuesta JSON
-        return new JsonResponse(array_values($filtered_nurses));
+        return new JsonResponse($filtered_nurses);
     }
 }
