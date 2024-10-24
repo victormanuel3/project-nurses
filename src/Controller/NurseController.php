@@ -20,7 +20,7 @@ class NurseController extends AbstractController
     }
 
     #[Route('/findByName', name: 'app_nurse_findByName', methods: ['GET'])]
-    public function filterByName(Request $request): JsonResponse
+    public function filterByName(Request $request): JsonResponse //Symfony crea un objeto con la petición (el filtro).
     {
         $json_nurse = file_get_contents('DATA.json');
         $json_data = json_decode($json_nurse, true);
